@@ -3,7 +3,7 @@ server {
     server_name <%= @server_names.join(' ') %>;
 
     location / {
-        root  <%= @root %>;
+        root  <%= @www_root %>;
         index <%= @index.join(' ') %>;
         try_files $uri $uri/ =404;
     }
