@@ -31,4 +31,9 @@ class centos_lemp::vhost (
     mode => '0644',
     content => template("${site_template}"),
   }
+  
+  file { "/etc/nginx/sites-enabled/${site_conf}":
+    ensure => 'link',
+    target => "/etc/nginx/sites-available/${site_conf}",
+  }
 }
