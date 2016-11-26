@@ -1,5 +1,5 @@
 server {
-    listen  80;
+    listen  <%= @http_port %>;
     server_name <%= @server_names.join(' ') %>;
 
     root  <%= @www_root %>;
