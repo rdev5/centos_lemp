@@ -15,6 +15,7 @@ define centos_lemp::resource::vhost (
   $site_template = undef,
   $server_names = [],
   $www_root = undef,
+  $include_test_php_file = true,
   $index = [],
   
   $ssl = "on",
@@ -58,6 +59,16 @@ define centos_lemp::resource::vhost (
     exec { "${site_conf}::dhparam":
       command => "/usr/bin/openssl dhparam -out ${ssl_dhparam} ${ssl_dhsize}; chmod 0600 ${ssl_dhparam}",
       onlyif => "/usr/bin/test ! -e ${ssl_dhparam}",
+    }
+  }
+  
+  if ($include_test_php_file) {
+    file { "${www_root}/test.php":
+      ensure => present,
+      owner => 'root',
+      group => 'root',
+      mode => '0644',
+      content => '<?php echo $_SERVER[\'SERVER_NAME\']; ?>',
     }
   }
 }
