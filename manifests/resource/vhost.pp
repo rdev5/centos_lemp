@@ -9,7 +9,7 @@
 #        root => '/var/www/example.com',
 #        index => ['index.html', 'index.htm'],
 #    }
-define centos_lemp::vhost (
+define centos_lemp::resource::vhost (
   $site_conf = undef,
   $site_template = undef,
   $server_names = [],
