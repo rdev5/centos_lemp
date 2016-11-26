@@ -1,11 +1,13 @@
+<% if @ssl_redirect %>
 server {
-        listen 80;
+        listen <%= @http_port %>;
         server_name <%= @server_names.join(' ') %>;
-        return 301 https://$host$request_uri;
+        return <%= @ssl_redirect_status %> https://$host$request_uri;
 }
+<% end %>
 
 server {
-        listen 443;
+        listen <%= @ssl_port %>;
         server_name <%= @server_names.join(' ') %>;
 
         root <%= @www_root %>;
