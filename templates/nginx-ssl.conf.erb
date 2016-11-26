@@ -38,4 +38,4 @@ server {
         <% "ssl_prefer_server_ciphers #{@ssl_prefer_server_ciphers};" if defined?(@ssl_prefer_server_ciphers) %>
         <% "ssl_ciphers #{@ssl_ciphers};" if defined?(@ssl_ciphers) %>
         <% "ssl_dhparam #{@ssl_dhparam};" if defined?(@ssl_dhparam) %>
-        <% "add_header Strict-Transport-Security "max-age=<%= @#{ %>};" if defined?(@ssl_sts_age) %>
+        <% "add_header Strict-Transport-Security \"max-age=#{@ssl_sts_age}\" always;" if defined?(@ssl_sts_age) %>
