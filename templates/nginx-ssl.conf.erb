@@ -1,0 +1,71 @@
+server {
+        listen 80;
+        server_name <%= @server_names.join(' ') %>;
+        return 301 https://$host$request_uri;
+}
+
+server {
+        listen 443;
+        server_name <%= @server_names.join(' ') %>;
+
+        root <%= @www_root %>;
+        index <%= @index.join(' ') %>;
+        
+        location / {
+            try_files $uri $uri/ =404;
+        }
+
+        error_page 404 /404.html;
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root  /usr/share/nginx/html;
+        }
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include fastcgi_params;
+        }
+
+        <% if defined?(ssl) %>
+        ssl <%= @ssl %>
+        <% end %>
+        
+        <% if defined?(ssl_certificate) %>
+        ssl_certificate <%= @ssl_certificate %>
+        <% end %>
+
+        <% if defined?(ssl_certificate_key) %>
+        ssl_certificate_key <%= @ssl_certificate_key %>
+        <% end %>
+
+        <% if defined?(ssl_session_cache) %>
+        ssl_session_cache <%= @ssl_session_cache %>
+        <% end %>
+
+        <% if defined?(ssl_session_timeout) %>
+        ssl_session_timeout <%= @ssl_session_timeout %>
+        <% end %>
+
+        <% if defined?(ssl_protocols) %>
+        ssl_protocols <%= @ssl_protocols %>
+        <% end %>
+
+        <% if defined?(ssl_prefer_server_ciphers) %>
+        ssl_prefer_server_ciphers <%= @ssl_prefer_server_ciphers %>
+        <% end %>
+
+        <% if defined?(ssl_ciphers) %>
+        ssl_ciphers <%= @ssl_ciphers %>
+        <% end %>
+
+        <% if defined?(ssl_dhparam) %>
+        ssl_dhparam <%= @ssl_dhparam %>;
+        <% end %>
+
+        <% if defined?(ssl_sts_age) %>
+        add_header Strict-Transport-Security "max-age=<%= @ssl_sts_age %>" always;
+        <% end %>
+}
