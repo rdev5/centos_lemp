@@ -61,7 +61,7 @@ class centos_lemp (
       owner => 'root',
       group => 'root',
       mode => '0644',
-      content => template("${nginx_conf_template}")
+      content => template("${nginx_template}")
     }
 
     service { 'nginx':
@@ -85,7 +85,7 @@ class centos_lemp (
     file { '/tmp/.secure-mysql.sh':
       require => Package['mariadb'],
       ensure => 'file',
-      source => "${mysql_secure_script_source}",
+      source => "${mysql_secure_script}",
       checksum => 'md5',
       checksum_value => 'eb0781ba0f8cf161a7dd342a19edac86',
       path => '/tmp/.secure-mysql.sh',
