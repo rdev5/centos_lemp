@@ -12,11 +12,11 @@
 class centos_lemp::vhost (
   $site_conf = undef,
   $server_names = [],
-  $root = undef,
+  $www_root = undef,
   $index = [],
   
 ) {
-  file { "${root}":
+  file { "${www_root}":
     ensure => directory,
     owner => 'root',
     group => 'root',
