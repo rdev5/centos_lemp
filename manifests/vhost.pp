@@ -11,6 +11,7 @@
 #    }
 class centos_lemp::vhost (
   $site_conf = undef,
+  $site_template = undef,
   $server_names = [],
   $www_root = undef,
   $index = [],
