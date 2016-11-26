@@ -3,7 +3,7 @@
 #
 # @example
 #    centos_lemp::vhost {
-#        site_conf => 'example.com',
+#        site_conf => 'example.com.conf',
 #        site_template => 'centos_lemp/nginx.conf.default.erb',
 #        server_names => ['example.com', 'www.example.com'],
 #        root => '/var/www/example.com',
