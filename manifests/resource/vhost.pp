@@ -51,7 +51,7 @@ define centos_lemp::resource::vhost (
   }
   
   if ($ssl_dhparam != undef) {
-    exec { "dhparam: ${ssl_dhparam}":
+    exec { "${site_conf}::dhparam":
       command => "/usr/bin/openssl dhparam -out ${ssl_dhparam} ${ssl_dhsize}",
       onlyif => "/usr/bin/test ! -e ${ssl_dhparam}",
     }
