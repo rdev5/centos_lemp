@@ -37,9 +37,4 @@ class centos_lemp::vhost (
     target => "/etc/nginx/sites-available/${site_conf}",
     notify => Service['nginx']
   }
-  
-  service { 'nginx':
-    ensure  => 'running',
-    enable  => true,
-  }
 }
