@@ -63,6 +63,20 @@ class centos_lemp (
       mode => '0644',
       content => template("${nginx_template}")
     }
+    
+    file { '/etc/nginx/sites-available':
+      ensure => directory,
+      owner => 'root',
+      group => 'root',
+      mode => '0755',
+    }
+
+    file { '/etc/nginx/sites-enabled':
+      ensure => directory,
+      owner => 'root',
+      group => 'root',
+      mode => '0755',
+    }
 
     service { 'nginx':
       ensure => running,
