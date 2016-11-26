@@ -30,11 +30,12 @@ class centos_lemp::vhost (
     group => 'root',
     mode => '0644',
     content => template("${site_template}"),
+    notify => Service['nginx'],
   }
   
   file { "/etc/nginx/sites-enabled/${site_conf}":
     ensure => 'link',
     target => "/etc/nginx/sites-available/${site_conf}",
-    notify => Service['nginx']
+    notify => Service['nginx'],
   }
 }
