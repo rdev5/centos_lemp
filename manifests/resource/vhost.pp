@@ -10,6 +10,7 @@
 #        index => ['index.html', 'index.htm'],
 #    }
 define centos_lemp::resource::vhost (
+  $http_port = 80,
   $site_conf = undef,
   $site_template = undef,
   $server_names = [],
@@ -17,6 +18,7 @@ define centos_lemp::resource::vhost (
   $index = [],
   
   $ssl = "on",
+  $ssl_port = 443,
   $ssl_certificate = undef,
   $ssl_certificate_key = undef,
   $ssl_session_cache = "shared:SSL:20m",
