@@ -18,6 +18,8 @@ define centos_lemp::resource::vhost (
   $index = [],
   
   $ssl = "on",
+  $ssl_redirect = true,
+  $ssl_redirect_status = 302,
   $ssl_port = 443,
   $ssl_certificate = undef,
   $ssl_certificate_key = undef,
