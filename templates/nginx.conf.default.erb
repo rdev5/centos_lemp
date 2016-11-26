@@ -4,7 +4,7 @@ server {
 
     location / {
         root  <%= @root %>;
-        index <%= @index %>;
+        index <%= @index.join(' ') %>;
         try_files $uri $uri/ =404;
     }
 
