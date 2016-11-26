@@ -36,9 +36,9 @@
 #
 class centos_lemp (
   $nginx_root = '/var/www/html',
-  $nginx_conf_template = 'centos_lemp/nginx.conf.erb',
+  $nginx_template = 'centos_lemp/nginx.conf.erb',
   $mysql_root = undef,
-  $mysql_secure_script_source = 'puppet:///modules/centos_lemp/secure-mysql.sh',
+  $mysql_secure_script = 'puppet:///modules/centos_lemp/secure-mysql.sh',
 ) {
     # update
     exec { 'yum-update':
