@@ -18,10 +18,10 @@
 # @example
 #    class { 'centos_lemp':
 #        nginx_root => '/var/www/html',
-#        nginx_template => 'puppet:///modules/centos7-lemp/nginx.conf.erb',
+#        nginx_template => 'centos_lemp/nginx.conf.erb',
 #
 #        mysql_root => 'CHANGETHIS',
-#        mysql_secure_script => 'puppet:///modules/centos7-lemp/secure-mysql.sh',
+#        mysql_secure_script => 'puppet:///modules/centos_lemp/secure-mysql.sh',
 #    }
 #
 # Authors
