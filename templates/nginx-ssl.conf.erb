@@ -29,13 +29,14 @@ server {
             include fastcgi_params;
         }
 
-        <% "ssl #{@ssl};" if defined?(@ssl) %>
-        <% "ssl_certificate #{@ssl_certificate};" if defined?(@ssl_certificate) %>
-        <% "ssl_certificate_key #{@ssl_certificate_key};" if defined?(@ssl_certificate_key) %>
-        <% "ssl_session_cache #{@ssl_session_cache};" if defined?(@ssl_session_cache) %>
-        <% "ssl_session_timeout #{@ssl_session_timeout};" if defined?(@ssl_session_timeout) %>
-        <% "ssl_protocols #{@ssl_protocols};" if defined?(@ssl_protocols) %>
-        <% "ssl_prefer_server_ciphers #{@ssl_prefer_server_ciphers};" if defined?(@ssl_prefer_server_ciphers) %>
-        <% "ssl_ciphers #{@ssl_ciphers};" if defined?(@ssl_ciphers) %>
-        <% "ssl_dhparam #{@ssl_dhparam};" if defined?(@ssl_dhparam) %>
-        <% "add_header Strict-Transport-Security \"max-age=#{@ssl_sts_age}\" always;" if defined?(@ssl_sts_age) %>
+        <%= "ssl #{@ssl};" if defined? @ssl %>
+        <%= "ssl_certificate #{@ssl_certificate};" if defined? @ssl_certificate %>
+        <%= "ssl_certificate_key #{@ssl_certificate_key};" if defined? @ssl_certificate_key %>
+        <%= "ssl_session_cache #{@ssl_session_cache};" if defined? @ssl_session_cache %>
+        <%= "ssl_session_timeout #{@ssl_session_timeout};" if defined? @ssl_session_timeout %>
+        <%= "ssl_protocols #{@ssl_protocols};" if defined? @ssl_protocols %>
+        <%= "ssl_prefer_server_ciphers #{@ssl_prefer_server_ciphers};" if defined? @ssl_prefer_server_ciphers %>
+        <%= "ssl_ciphers #{@ssl_ciphers};" if defined? @ssl_ciphers %>
+        <%= "ssl_dhparam #{@ssl_dhparam};" if defined? @ssl_dhparam %>
+        <%= "add_header Strict-Transport-Security \"max-age=#{@ssl_sts_age}\" always;" if defined? @ssl_sts_age %>
+}
