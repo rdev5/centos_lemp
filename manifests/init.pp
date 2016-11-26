@@ -175,4 +175,6 @@ class centos_lemp (
       ensure => running,
       enable => true,
     }
+    
+    include '::centos_lemp::vhost'
 }
