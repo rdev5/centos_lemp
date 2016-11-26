@@ -16,6 +16,17 @@ define centos_lemp::resource::vhost (
   $www_root = undef,
   $index = [],
   
+  $ssl = "on",
+  $ssl_certificate = undef,
+  $ssl_certificate_key = undef,
+  $ssl_session_cache = "shared:SSL:20m",
+  $ssl_session_timeout = "180m",
+  $ssl_protocols = "TLSv1 TLSv1.1 TLSv1.2",
+  $ssl_prefer_server_ciphers = "on",
+  $ssl_ciphers = "ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5",
+  $ssl_dhparam = "/etc/ssl/certs/dhparam.pem",
+  $ssl_dhsize = 2048,
+  $ssl_sts_age = undef,
 ) {
   file { "${www_root}":
     ensure => directory,
@@ -37,5 +48,12 @@ define centos_lemp::resource::vhost (
     ensure => 'link',
     target => "/etc/nginx/sites-available/${site_conf}",
     notify => Service['nginx'],
+  }
+  
+  if ($ssl_dhparam != undef) {
+    exec { "dhparam: ${ssl_dhparam}":
+      command => "/usr/bin/openssl dhparam -out ${ssl_dhparam} ${ssl_dhsize}",
+      onlyif => "/usr/bin/test ! -e ${ssl_dhparam}",
+    }
   }
 }
