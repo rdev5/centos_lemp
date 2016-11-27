@@ -15,7 +15,7 @@ define centos_lemp::resource::vhost (
   $site_template = undef,
   $server_names = [],
   $www_root = undef,
-  $include_test_php_file = true,
+  $include_test_php_file = false,
   $index = [],
   
   $ssl = "on",
