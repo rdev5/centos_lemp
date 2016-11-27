@@ -16,7 +16,7 @@ define centos_lemp::resource::vhost (
   $server_names = [],
   $www_root = undef,
   $include_test_php_file = false,
-  $index = [],
+  $index = ['index.php', 'index.html', 'index.htm'],
   
   $ssl = "on",
   $ssl_redirect = true,
