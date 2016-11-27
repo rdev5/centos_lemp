@@ -12,7 +12,7 @@
 define centos_lemp::resource::vhost (
   $http_port = 80,
   $site_conf = undef,
-  $site_template = undef,
+  $site_template = 'centos_lemp/nginx.conf.default.erb',
   $server_names = [],
   $www_root = undef,
   $include_test_php_file = false,
