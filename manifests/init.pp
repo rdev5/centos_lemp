@@ -141,40 +141,41 @@ class centos_lemp (
       ensure => installed,
     }
 
-    file_line { 'www.conf: php-fpm.sock':
-      path  => '/etc/php-fpm.d/www.conf',
-      line  => 'listen = /var/run/php-fpm/php-fpm.sock',
-      match => '^listen = .+',
-    }
-
-    file_line { 'www.conf: listen.owner':
-      path  => '/etc/php-fpm.d/www.conf',
-      line  => 'listen.owner = nginx',
-      match => '^listen\.owner = .+',
-    }
-
-    file_line { 'www.conf: listen.group':
-      path  => '/etc/php-fpm.d/www.conf',
-      line  => 'listen.group = nginx',
-      match => '^listen\.group = .+',
-    }
-
-    file_line { 'www.conf: listen.mode':
-      path  => '/etc/php-fpm.d/www.conf',
-      line  => 'listen.mode = 0600',
-      match => '^listen\.mode = .+',
-    }
-
-    file_line { 'www.conf: user':
+    file_line { 'user (/etc/php-fpm.d/www.conf)':
       path  => '/etc/php-fpm.d/www.conf',
       line  => 'user = nginx',
       match => '^user = .+',
     }
 
-    file_line { 'www.conf: group':
+    file_line { 'group (/etc/php-fpm.d/www.conf)':
       path  => '/etc/php-fpm.d/www.conf',
       line  => 'group = nginx',
       match => '^group = .+',
+    }
+
+    file_line { 'listen (/etc/php-fpm.d/www.conf)':
+      path  => '/etc/php-fpm.d/www.conf',
+      line  => 'listen = /var/run/php-fpm/php-fpm.sock',
+      match => '^listen = .+',
+    }
+
+    file_line { 'listen.owner  (/etc/php-fpm.d/www.conf)':
+      path  => '/etc/php-fpm.d/www.conf',
+      line  => 'listen.owner = nginx',
+      match => '^listen\.owner = .+',
+    }
+
+    file_line { 'listen.group  (/etc/php-fpm.d/www.conf)':
+      path  => '/etc/php-fpm.d/www.conf',
+      line  => 'listen.group = nginx',
+      match => '^listen\.group = .+',
+    }
+
+    file_line { 'listen.mode (/etc/php-fpm.d/www.conf)':
+      path  => '/etc/php-fpm.d/www.conf',
+      line  => 'listen.mode = 0600',
+      match => '^listen\.mode = .+',
+      notify => Service['nginx'],
     }
 
     service { 'php-fpm':
