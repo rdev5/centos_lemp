@@ -40,12 +40,12 @@ class centos_lemp (
   $mysql_root = undef,
   $mysql_secure_script = 'puppet:///modules/centos_lemp/secure-mysql.sh',
 ) {
-    # update
+    # yum-pdate
     exec { 'yum-update':
       command => '/usr/bin/yum -y update',
     }
 
-    # install nginx
+    # nginx
     package { 'epel-release':
       require => Exec['yum-update'],
       ensure => installed,
@@ -83,7 +83,7 @@ class centos_lemp (
       enable => true,
     }
 
-    # install mariadb
+    # mariadb
     package { 'mariadb-server':
       require => Exec['yum-update'],
       ensure => installed,
@@ -119,23 +119,31 @@ class centos_lemp (
       enable => true,
     }
 
-    # install php
+    # php
     package { 'php':
       require => Exec['yum-update'],
       ensure => installed,
     }
 
-    file_line { '[php.ini] cgi.fix_pathinfo':
+    file_line { 'cgi.fix_pathinfo (/etc/php.ini)':
       path  => '/etc/php.ini',
-      line  => 'cgi.fix_pathinfo=0',
-      match => '^cgi\.fix_pathinfo=.+',
+      line  => 'cgi.fix_pathinfo = 0',
+      match => '^cgi\.fix_pathinfo\s*=\s*.+',
     }
 
+    file_line { 'expose_php (/etc/php.ini)':
+      path  => '/etc/php.ini',
+      line  => 'expose_php = Off',
+      match => '^expose_php\s*=\s*.+',
+    }
+
+    # php-mysql
     package { 'php-mysql':
       require => Exec['yum-update'],
       ensure => installed,
     }
 
+    # php-fpm
     package { 'php-fpm':
       require => Exec['yum-update'],
       ensure => installed,
