@@ -149,14 +149,20 @@ class centos_lemp (
 
     file_line { 'www.conf: listen.owner':
       path  => '/etc/php-fpm.d/www.conf',
-      line  => 'listen.owner = nobody',
+      line  => 'listen.owner = nginx',
       match => '^listen\.owner = .+',
     }
 
     file_line { 'www.conf: listen.group':
       path  => '/etc/php-fpm.d/www.conf',
-      line  => 'listen.group = nobody',
+      line  => 'listen.group = nginx',
       match => '^listen\.group = .+',
+    }
+
+    file_line { 'www.conf: listen.mode':
+      path  => '/etc/php-fpm.d/www.conf',
+      line  => 'listen.mode = 0600',
+      match => '^listen\.mode = .+',
     }
 
     file_line { 'www.conf: user':
